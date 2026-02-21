@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1771611846627",
+      "username": "michael sebastian",
+      "email": "himeshdheeraj@gmail.com",
+      "blood_type": "O-",
+      "password": "123"
+    },
+    {
+      "id": "1771625904382",
+      "username": "mani",
+      "email": "galimani@gmail.com",
+      "blood_type": "B-",
+      "password": "123"
+    },
+    {
+      "id": "1771625963366",
+      "username": "ellie",
+      "email": "elliewhilliams@gmail.com",
+      "blood_type": "B+",
+      "password": "elliefuckingwilliams"
+    }
+  ]
+}
