@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/final_glitch/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocity Drift - 3D Car Game</title>
+  <script type="module" crossorigin src="/final_glitch/assets/index-E_UjKhV1.js"></script>
+  <link rel="stylesheet" crossorigin href="/final_glitch/assets/index-DBpHQYgv.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="ui-layer">
+      <div class="top-row">
+        <div class="score-container">
+          <span class="score-label">Score</span>
+          <span id="score" class="score-value">0</span>
+        </div>
+        <div class="powerups-container">
+          <div id="pw-primary" class="pw-slot empty">
+            <span class="slot-label">SPACE</span>
+            <div class="icon"></div>
+          </div>
+          <div id="pw-secondary" class="pw-slot empty">
+            <span class="slot-label">NEXT</span>
+            <div class="icon"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="game-over" class="game-over-overlay">
+      <h1 class="game-over-title">Game Over</h1>
+      <p class="final-score">Final Score: <span id="final-score">0</span></p>
+      <button id="restart-btn" class="btn-restart">Play Again</button>
+    </div>
+
+    <div id="hint" class="controls-hint">
+      A/D: Lanes | SPACE: Use Power | Pick up Spikes (⚙️) to crush!
+    </div>
+  </div>
+</body>
+
+</html>
