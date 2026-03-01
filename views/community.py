@@ -69,28 +69,20 @@ with tab_directory:
     st.subheader("Registered Community Members")
     
     try:
-        # Fetch all registered users directly from the node server
-        response = requests.get("http://localhost:3001/users", timeout=2)
-        if response.status_code == 200:
-            users_list = response.json()
+        from utils.auth import get_all_users
+        users_list = get_all_users()
+        
+        if len(users_list) > 0:
+            df_users = pd.DataFrame(users_list)
+            # Cleanup the dataframe for display
+            df_users = df_users.rename(columns={
+                "username": "Full Name",
+                "email": "Contact Email",
+                "blood_type": "Medical/Blood Type"
+            })
             
-            if len(users_list) > 0:
-                df_users = pd.DataFrame(users_list)
-                # Cleanup the dataframe for display
-                df_users = df_users.rename(columns={
-                    "username": "Full Name",
-                    "email": "Contact Email",
-                    "blood_type": "Medical/Blood Type"
-                })
-                # Drop internal ID
-                if 'id' in df_users.columns:
-                    df_users = df_users.drop(columns=['id'])
-                
-                st.dataframe(df_users, use_container_width=True, hide_index=True)
-            else:
-                st.info("No other users are currently registered in the database.")
+            st.dataframe(df_users, use_container_width=True, hide_index=True)
         else:
-            st.error("Could not fetch User Directory from the Server.")
+            st.info("No other users are currently registered in the database.")
     except Exception as e:
-        st.error("Authentication Server is offline. Unable to fetch community members.")
-        st.info("Ensure `node server.js` is running on port 3001.")
+        st.error(f"Error fetching community members: {str(e)}")

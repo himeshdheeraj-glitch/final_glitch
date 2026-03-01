@@ -66,27 +66,19 @@ with st.form("register_form"):
             st.error("Please enter a valid Name.")
         else:
             try:
-                import requests
-                response = requests.post("http://localhost:3001/register", json={
-                    "username": username,
-                    "email": email,
-                    "blood_type": blood_type,
-                    "password": password
-                })
+                from utils.auth import register_user
+                success, result = register_user(username, email, blood_type, password)
                 
-                if response.status_code == 201:
-                    data = response.json()
+                if success:
                     st.success(f"Account created for {username}! You can now access the system.")
                     st.session_state['logged_in'] = True
-                    st.session_state['current_user_name'] = data['user']['username']
-                    st.session_state['current_user_blood'] = data['user']['blood_type']
+                    st.session_state['current_user_name'] = result['username']
+                    st.session_state['current_user_blood'] = result['blood_type']
                     time.sleep(1) # small delay to show success message
                     st.rerun()
-                elif response.status_code == 409:
-                    st.error("This username or email is already registered. Please Log In.")
                 else:
-                    st.error(f"Registration failed: {response.json().get('error', 'Unknown error')}")
-            except requests.exceptions.RequestException as e:
-                st.error("Could not connect to Authentication Server. Is it running?")
+                    st.error(f"Registration failed: {result}")
+            except Exception as e:
+                st.error(f"Error during registration: {str(e)}")
 
 st.markdown("Already have an account? Use the Navigation to go to **Log In**.")

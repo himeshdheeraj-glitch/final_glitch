@@ -63,27 +63,22 @@ with st.form("login_form"):
             st.error("Please enter both Username and Password.")
         else:
             try:
-                import requests
+                from utils.auth import login_user
                 import time
-                response = requests.post("http://localhost:3001/login", json={
-                    "username": username,
-                    "password": password
-                })
                 
-                if response.status_code == 200:
-                    data = response.json()
-                    st.success(f"Welcome back, {data['user']['username']}! Initializing secure connection...")
+                success, result = login_user(username, password)
+                
+                if success:
+                    st.success(f"Welcome back, {result['username']}! Initializing secure connection...")
                     st.session_state['logged_in'] = True
-                    st.session_state['current_user_name'] = data['user']['username']
-                    st.session_state['current_user_blood'] = data['user']['blood_type']
+                    st.session_state['current_user_name'] = result['username']
+                    st.session_state['current_user_blood'] = result['blood_type']
                     time.sleep(1)
                     st.rerun()
-                elif response.status_code == 401:
-                    st.error("Invalid credentials. Please check your spelling or Register.")
                 else:
-                    st.error(f"Login failed: {response.json().get('error', 'Unknown error')}")
-            except requests.exceptions.RequestException as e:
-                st.error("Could not connect to Authentication Server. Is it running?")
+                    st.error(f"Login failed: {result}")
+            except Exception as e:
+                st.error(f"Error during authentication: {str(e)}")
 
 st.markdown("---")
 cols = st.columns(3)
