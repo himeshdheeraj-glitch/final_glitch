@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "username": "Jane Doe",
+            "email": "jane@example.com",
+            "blood_type": "O+",
+            "password": "password"
+        },
+        {
+            "id": "2",
+            "username": "David Smith",
+            "email": "david@panicshield.org",
+            "blood_type": "AB-",
+            "password": "password"
+        },
+        {
+            "id": "3",
+            "username": "Sarah Connor",
+            "email": "sarah@safety.net",
+            "blood_type": "A+",
+            "password": "password"
+        }
+    ]
+}
